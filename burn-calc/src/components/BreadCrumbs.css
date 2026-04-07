@@ -18,8 +18,7 @@
     cursor: pointer;
 }
 
-.breadCrumbs li:last-child,
-.breadCrumbs li:last-child a {
+.breadCrumbs li:last-child {
     color: black;
     font-weight: 500;
 }

@@ -30,6 +30,7 @@ export const DetailPage: FC = () => {
     <Container className="py-4">
       <BreadCrumbs
         crumbs={[
+          { label: ROUTE_LABELS.HOME, path: ROUTES.HOME },
           { label: ROUTE_LABELS.LIST, path: ROUTES.LIST },
           { label: compound.title },
         ]}

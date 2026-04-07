@@ -31,7 +31,10 @@ export const ListPage: FC = () => {
 
   return (
     <Container className="py-4">
-      <BreadCrumbs crumbs={[{ label: ROUTE_LABELS.LIST, path: ROUTES.LIST }]} />
+      <BreadCrumbs crumbs={[
+        { label: ROUTE_LABELS.HOME, path: ROUTES.HOME },
+        { label: ROUTE_LABELS.LIST, path: ROUTES.LIST },
+      ]} />
 
       <SearchField
         value={query}
