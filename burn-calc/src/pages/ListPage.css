@@ -1,0 +1,6 @@
+.compounds-grid {
+    gap: 32px;
+    margin-top: 20px;
+    display: inline-flex;
+    flex-wrap: wrap;
+}

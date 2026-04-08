@@ -8,11 +8,11 @@ interface Crumb {
   path?: string;
 }
 
-interface BreadCrumbsProps {
+interface Props {
   crumbs: Crumb[];
 }
 
-export const BreadCrumbs: FC<BreadCrumbsProps> = ({ crumbs }) => {
+export const BreadCrumbs: FC<Props> = ({ crumbs }) => {
   return (
     <ul className="breadCrumbs">
       {crumbs.map((crumb, index) => (

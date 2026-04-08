@@ -19,7 +19,7 @@ export const DetailPage: FC = () => {
       setCompound(data);
       setLoading(false);
     });
-  }, [id]);
+  }, []);
 
   if (loading)
     return <div className="text-center mt-5"><Spinner animation="border" /></div>;
@@ -30,7 +30,6 @@ export const DetailPage: FC = () => {
     <Container className="py-4">
       <BreadCrumbs
         crumbs={[
-          { label: ROUTE_LABELS.HOME, path: ROUTES.HOME },
           { label: ROUTE_LABELS.LIST, path: ROUTES.LIST },
           { label: compound.title },
         ]}

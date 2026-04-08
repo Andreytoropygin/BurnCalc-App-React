@@ -32,8 +32,7 @@ export const ListPage: FC = () => {
   return (
     <Container className="py-4">
       <BreadCrumbs crumbs={[
-        { label: ROUTE_LABELS.HOME, path: ROUTES.HOME },
-        { label: ROUTE_LABELS.LIST, path: ROUTES.LIST },
+        { label: ROUTE_LABELS.LIST, path: ROUTES.LIST }
       ]} />
 
       <SearchField
@@ -50,10 +49,10 @@ export const ListPage: FC = () => {
       )}
 
       {!loading && (
-        <Row className="g-4 justify-content-start">
+        <Row className="g-4 compounds-grid">
           {compounds.length > 0 ? (
             compounds.map((compound) => (
-              <Col key={compound.id} xs={12} sm={6} md={4} lg={3}>
+              <Col key={compound.id} xs="auto">
                 <CompoundCard compound={compound} />
               </Col>
             ))

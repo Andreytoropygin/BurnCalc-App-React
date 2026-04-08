@@ -2,7 +2,7 @@ import type { FC, SyntheticEvent } from "react";
 import { Form, Button, Spinner } from "react-bootstrap";
 import "./SearchField.css";
 
-interface SearchFieldProps {
+interface Props {
   value: string;
   onChange: (value: string) => void;
   onSubmit: () => void;
@@ -10,7 +10,7 @@ interface SearchFieldProps {
   placeholder?: string;
 }
 
-export const SearchField: FC<SearchFieldProps> = ({
+export const SearchField: FC<Props> = ({
   value,
   onChange,
   onSubmit,
