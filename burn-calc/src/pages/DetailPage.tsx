@@ -51,6 +51,13 @@ export const DetailPage: FC = () => {
                   width="100%"
                   className="video-placeholder"
                   src={`/videos/${compound.videoUrl}`}
+                  onError={(e) => {
+                    const target = e.target as HTMLVideoElement;
+                    if (target.src !== window.location.origin + "/default-video.mp4") {
+                      target.src = "/default-video.mp4";
+                      target.load();
+                    }
+                  }}
                 />
               </div>
               <div className="caption-container">
