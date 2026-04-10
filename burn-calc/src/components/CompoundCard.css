@@ -1,0 +1,51 @@
+.compound-card {
+    width: 248px;
+    max-width: 100%;
+    border: 1px solid #567 !important;
+    border-radius: 6px !important;
+    background-color: white !important;
+    box-shadow: none !important;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+  
+.card-link {
+    text-decoration: none !important;
+    color: inherit !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.compound-image {
+    width: 150px !important;
+    height: 150px !important;
+    object-fit: contain !important;
+    margin: 20px auto 10px auto !important;
+    display: block;
+    background-color: transparent;
+}
+
+.compound-card-body {
+    padding: 0 20px 20px 20px !important;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.compound-title {
+    font-size: 1.3rem;
+    margin-bottom: 5px !important;
+    color: #000;
+    font-weight: 500;
+}
+
+.compound-formula {
+    font-size: 1.1rem;
+    margin-bottom: 0 !important;
+    color: #333;
+}
