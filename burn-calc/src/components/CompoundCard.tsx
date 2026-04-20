@@ -7,9 +7,10 @@ import "./CompoundCard.css";
 
 interface Props {
   compound: Compound;
+  similarityScore?: number;
 }
 
-export const CompoundCard: FC<Props> = ({ compound }) => {
+export const CompoundCard: FC<Props> = ({ compound, similarityScore }) => {
   return (
     <Card className="compound-card h-100">
       <Link to={`${ROUTES.DETAIL.replace(":id", String(compound.id))}`} className="card-link">
@@ -23,7 +24,15 @@ export const CompoundCard: FC<Props> = ({ compound }) => {
         />
         <Card.Body className="compound-card-body">
           <Card.Title className="compound-title">{compound.title}</Card.Title>
-          <Card.Text className="compound-formula">{compound.formula}</Card.Text>
+          <Card.Text className="compound-formula mb-0">{compound.formula}</Card.Text>
+          
+          {similarityScore !== undefined && similarityScore > 0 && (
+            <div className="similarity-badge mt-2">
+              <small className="text-muted">
+                Сходство: {(similarityScore * 100).toFixed(1)}%
+              </small>
+            </div>
+          )}
         </Card.Body>
       </Link>
     </Card>

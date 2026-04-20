@@ -8,9 +8,9 @@ export interface ProcessedCompound extends Compound {
     embedding?: number[];
 }
 
-export const useCompoundSearch = (initialItems: Compound[]) => { 
-    const [items, setItems] = useState<ProcessedCompound[]>(
-        initialItems.map(item => ({ ...item, score: 0, isVisible: true }))
+export const useCompoundSearch = (initialCompounds: Compound[]) => { 
+    const [compounds, setCompounds] = useState<ProcessedCompound[]>(
+        initialCompounds.map(compound => ({ ...compound, score: 0, isVisible: true }))
     );
     
     const [imageEmbedding, setImageEmbedding] = useState<number[] | null>(null);
@@ -18,6 +18,10 @@ export const useCompoundSearch = (initialItems: Compound[]) => {
     const [progress, setProgress] = useState(0);
     
     const workerRef = useRef<Worker | null>(null);
+
+    useEffect(() => {
+        setCompounds(initialCompounds.map(compound => ({ ...compound, score: 0, isVisible: true })));
+    }, [initialCompounds]);
 
     useEffect(() => {
         workerRef.current = new Worker(new URL('../workers/search.worker.ts', import.meta.url), {
@@ -34,9 +38,9 @@ export const useCompoundSearch = (initialItems: Compound[]) => {
                     break;
                 
                 case 'text_embeddings_ready':
-                     setItems(prev => prev.map(item => ({
-                        ...item,
-                        embedding: data[item.id]
+                     setCompounds(prev => prev.map(compound => ({
+                        ...compound,
+                        embedding: data[compound.id]
                     })));
                     setReady(true);
                     break;
@@ -47,32 +51,32 @@ export const useCompoundSearch = (initialItems: Compound[]) => {
             }
         };
 
-        workerRef.current.postMessage({ type: 'init', data: initialItems });
+        workerRef.current.postMessage({ type: 'init', data: initialCompounds });
 
         return () => workerRef.current?.terminate();
-    }, [initialItems]);
+    }, [initialCompounds]);
 
     useEffect(() => {
         if (!imageEmbedding) return;
 
-        setItems(prevItems => {
-            if (!prevItems[0].embedding) return prevItems;
+        setCompounds(prevCompounds => {
+            if (!prevCompounds[0]?.embedding) return prevCompounds;
 
-            const threshold = 0.005;
+            const threshold = 0.05;
 
-            const processed = prevItems.map(item => {
-                if (!item.embedding) return item; 
+            let processed = prevCompounds.map((compound, i) => {
+                if (!compound.embedding) return compound; 
                 
-                const similarity = cosineSimilarity(imageEmbedding, item.embedding);
+                const similarity = cosineSimilarity(imageEmbedding, compound.embedding);
                 
                 return {
-                    ...item,
+                    ...compound,
                     score: similarity,
-                    isVisible: similarity > threshold
+                    isVisible: similarity > threshold && i < 4
                 };
             });
 
-            processed.sort((a, b) => b.score - a.score);
+            processed = processed.sort((a, b) => b.score - a.score);
             
             return processed;
         });
@@ -85,10 +89,10 @@ export const useCompoundSearch = (initialItems: Compound[]) => {
 
     const resetSearch = () => {
         setImageEmbedding(null);
-        setItems(prev => {
+        setCompounds(prev => {
             const sortedById = [...prev].sort((a, b) => a.id - b.id);
-            return sortedById.map(item => ({
-                ...item,
+            return sortedById.map(compound => ({
+                ...compound,
                 score: 0,
                 isVisible: true
             }));
@@ -96,7 +100,7 @@ export const useCompoundSearch = (initialItems: Compound[]) => {
     };
 
     return {
-        items,
+        compounds,
         ready,
         progress,
         imageEmbedding,

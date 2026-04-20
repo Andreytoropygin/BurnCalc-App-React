@@ -36,6 +36,11 @@ self.addEventListener('message', async (event) => {
     try {
         if (type === 'init') {
             await SiglipService.init((msg) => {
+                // if (msg.status === 'progress') {
+                //     self.postMessage({ type: 'progress', data: msg.progress });
+                // } else if (msg.status === 'ready' || msg.status === 'done') {
+                //     self.postMessage({ type: 'model_ready' });
+                // }
                 self.postMessage({ type: 'progress', data: msg });
             });
 
