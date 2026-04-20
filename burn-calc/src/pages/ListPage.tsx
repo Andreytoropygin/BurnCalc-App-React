@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import type { Compound } from "../modules/compoundsApi";
+import { getCombustionDraftBrief, type CombustionDraftBrief } from "../modules/combustionsApi";
 import { useState, useEffect } from "react";
 import { ROUTES, ROUTE_LABELS } from "../Routes";
 import { BreadCrumbs } from "../components/BreadCrumbs";
@@ -8,25 +9,30 @@ import { getCompoundsByName } from "../modules/compoundsApi";
 import { CompoundCard } from "../components/CompoundCard";
 import { Container, Spinner, Row, Col } from "react-bootstrap";
 import { CombustionWidget } from "../components/CombustionWidget";
+import { COMPOUNDS_MOCK } from "../modules/mock";
 import "./ListPage.css"
 
 export const ListPage: FC = () => {
   const [query, setQuery] = useState("");
   const [compounds, setCompounds] = useState<Compound[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [draft, setDraft] = useState<CombustionDraftBrief | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const handleSearch = async () => {
     setLoading(true);
-    try {
-      const data = await getCompoundsByName(query);
-      setCompounds(data);
-    } finally {
-      setLoading(false);
-    }
+    getCompoundsByName(query)
+      .then(response => setCompounds(response))
+      .catch(() => setCompounds(COMPOUNDS_MOCK.filter(compound => 
+        compound.title
+          .toLowerCase()
+          .startsWith(query.toLowerCase())
+      )));
+    setLoading(false);
   };
 
   useEffect(() => {
     handleSearch();
+    getCombustionDraftBrief().then(response => setDraft(response))
   }, []);
 
   return (
@@ -64,7 +70,7 @@ export const ListPage: FC = () => {
         </Row>
       )}
 
-      <CombustionWidget />
+      {draft && <CombustionWidget count={draft.compoundsCount} />}
     </Container>
   );
 };

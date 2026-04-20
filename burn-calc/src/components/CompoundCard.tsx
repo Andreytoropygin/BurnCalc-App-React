@@ -15,7 +15,7 @@ export const CompoundCard: FC<Props> = ({ compound }) => {
       <Link to={`${ROUTES.DETAIL.replace(":id", String(compound.id))}`} className="card-link">
         <Card.Img
           variant="top"
-          src={`/images/${compound.imageUrl}`}
+          src={`${compound.imageUrl}`}
           className="compound-image"
           onError={(e) => {
             (e.target as HTMLImageElement).src = "/default-compound.png";

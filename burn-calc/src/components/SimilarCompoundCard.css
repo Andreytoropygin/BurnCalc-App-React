@@ -1,0 +1,21 @@
+.similar-compound-row {
+  border: solid 1px #567 !important;
+  background-color: white;
+}
+
+.similar-compound-img {
+  width: 20%;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  padding: 4px;
+}
+
+.similar-compound-info {
+  padding-right: 0.5rem;
+  border-right: solid 1px #abc;
+}
+
+.similarity-info {
+  justify-content: center;
+  text-align: center;
+} 

@@ -38,3 +38,7 @@
 video::-webkit-media-controls {
     display: none !important;
 }
+
+.card-text {
+    margin-bottom: 0.5rem;
+}
