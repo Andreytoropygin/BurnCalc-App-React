@@ -5,6 +5,5 @@ export interface CombustionDraftBrief {
 
 export const getCombustionDraftBrief = async (): Promise<CombustionDraftBrief> => {
   return await fetch(`/api/combustions/draft-brief`)
-    .then(response => response.json())
-    .catch(() => {{combustionId: null; compoundsCount: 1;}});
+    .then(response => response.json());
 };

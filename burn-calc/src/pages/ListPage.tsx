@@ -38,7 +38,9 @@ export const ListPage: FC = () => {
 
   useEffect(() => {
     handleSearch();
-    getCombustionDraftBrief().then(response => setDraft(response));
+    getCombustionDraftBrief()
+      .then(response => {setDraft(response); console.log(response)})
+      .catch(() => setDraft({combustionId: null, compoundsCount: 0}));
   }, []);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {

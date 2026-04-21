@@ -20,7 +20,9 @@ export const useCompoundSearch = (initialCompounds: Compound[]) => {
     const workerRef = useRef<Worker | null>(null);
 
     useEffect(() => {
-        setCompounds(initialCompounds.map(compound => ({ ...compound, score: 0, isVisible: true })));
+        setCompounds(initialCompounds
+            .sort((a, b) => a.id - b.id)
+            .map(compound => ({ ...compound, score: 0, isVisible: true })));
     }, [initialCompounds]);
 
     useEffect(() => {
