@@ -1,0 +1,29 @@
+.combustion-widget {
+    cursor: not-allowed;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #aaa;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.compounds-count {
+    position: absolute;
+    top: -0.3rem;
+    right: -0.3rem;
+    width: 20px;
+    height: 20px;
+    padding: 0 !important;
+    text-align: center;
+    font-size: 0.5em !important;
+    border-radius: 50% !important;
+    line-height: 20px !important;
+  }

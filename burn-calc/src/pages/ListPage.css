@@ -1,0 +1,64 @@
+.compounds-grid {
+    gap: 32px;
+    margin-top: 1.5rem !important;
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+
+.compounds-grid {
+    gap: 32px;
+    margin-top: 20px;
+}
+
+.similarity-badge {
+    background-color: #d4edda;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.image-search-section {
+    border: 1px solid #567;
+    background-color: #f8f9fa;
+}
+
+.preview-image {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    width: 150px; 
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #dee2e6;
+}
+
+.placeholder-image {
+    width: 150px; 
+    height: 150px; 
+    background: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: #adb5bd;
+    border: 2px dashed #dee2e6;
+}
+
+.load-image-btn {
+    background-color: #567 !important;
+    border-color: #567 !important;
+}
+
+.load-image-btn:hover {
+    background-color: #345 !important;
+}
+
+.reset-image-search-btn {
+    color: black !important;
+    background-color: transparent !important;
+    border-color: #567 !important;
+}
+
+.reset-image-search-btn:hover {
+    background-color: #345 !important;
+    color: white !important;
+}

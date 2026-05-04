@@ -1,0 +1,36 @@
+.custom-navbar {
+    background-color: #5389ae !important;
+    padding: 7px 0;
+}
+
+.logo-icon {
+    color: white;
+    background-color: #3b637d;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.logo-text {
+    text-shadow: 1px 2px 3px #147;
+    font-size: 36px;
+    line-height: 43px;
+    color: white;
+    font-weight: bold;
+}
+
+.nav-link-custom {
+    color: white !important;
+    font-size: 1.1rem;
+    margin-left: 20px;
+    transition: opacity 0.2s;
+}
+
+.nav-link-custom:hover {
+    opacity: 0.8;
+}
