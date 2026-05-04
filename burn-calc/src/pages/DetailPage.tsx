@@ -6,8 +6,8 @@ import { BreadCrumbs } from "../components/BreadCrumbs";
 import { ROUTES, ROUTE_LABELS } from "../Routes";
 import { Container, Spinner, Card, Row, Col, ProgressBar } from "react-bootstrap";
 import { COMPOUNDS_MOCK } from "../modules/mock";
-import { useSemanticSearch } from "../hooks/useSemanticSearch";
-import { SimilarCompoundCard } from "../components/SimilarCompoundCard";
+// import { useSemanticSearch } from "../hooks/useSemanticSearch";
+// import { SimilarCompoundCard } from "../components/SimilarCompoundCard";
 import "./DetailPage.css";
 
 export const DetailPage: FC = () => {
@@ -16,17 +16,17 @@ export const DetailPage: FC = () => {
   const [loading, setLoading] = useState(true);
 
   // Состояние для всех соединений (нужно для воркера)
-  const [allCompounds, setAllCompounds] = useState<Compound[]>([]);
+  // const [allCompounds, setAllCompounds] = useState<Compound[]>([]);
 
   // Используем хук семантического поиска
-  const { similarCompounds, isModelReady, areEmbeddingsReady, progress } = useSemanticSearch(allCompounds, Number(id));
+  // const { similarCompounds, isModelReady, areEmbeddingsReady, progress } = useSemanticSearch(allCompounds, Number(id));
   
-  useEffect(() => {
-    // Загружаем все соединения один раз для инициализации воркера
-    getCompoundsByName()
-      .then(response => setAllCompounds(response))
-      .catch(() => setAllCompounds(COMPOUNDS_MOCK));
-  }, []);
+  // useEffect(() => {
+  //   // Загружаем все соединения один раз для инициализации воркера
+  //   getCompoundsByName()
+  //     .then(response => setAllCompounds(response))
+  //     .catch(() => setAllCompounds(COMPOUNDS_MOCK));
+  // }, []);
 
   useEffect(() => {
     if (!id) return;
@@ -85,13 +85,13 @@ export const DetailPage: FC = () => {
                     При сгорании выделяет {compound.specificH2oVolume} л H<sub>2</sub>O и{" "}
                     {compound.specificCo2Volume} л CO<sub>2</sub> на каждый моль вещества
                   </Card.Text>
-                  <Card.Text>{compound.description}</Card.Text>
+                  <Card.Text>{compound.description_rus}</Card.Text>
                 </Card.Body>
               </div>
             </div>
           </Card>
         </Col>
-        <Col lg={5}>
+        {/* <Col lg={5}>
           <div>
             <h5>Похожие соединения</h5>
             {!isModelReady ? (
@@ -113,7 +113,7 @@ export const DetailPage: FC = () => {
               <p className="text-muted small p-3 mb-0">Похожие соединения не найдены</p>
             )}
           </div>
-        </Col>
+        </Col> */}
       </Row>
     </Container>
   );

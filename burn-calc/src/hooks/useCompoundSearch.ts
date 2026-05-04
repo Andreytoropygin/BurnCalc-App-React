@@ -16,6 +16,7 @@ export const useCompoundSearch = (initialCompounds: Compound[]) => {
     const [imageEmbedding, setImageEmbedding] = useState<number[] | null>(null);
     const [ready, setReady] = useState(false);
     const [progress, setProgress] = useState(0);
+    const [isActive, setIsActive] = useState(false);
     
     const workerRef = useRef<Worker | null>(null);
 
@@ -80,6 +81,7 @@ export const useCompoundSearch = (initialCompounds: Compound[]) => {
 
             processed = processed.sort((a, b) => b.score - a.score);
             
+            setIsActive(true);
             return processed;
         });
 
@@ -93,6 +95,7 @@ export const useCompoundSearch = (initialCompounds: Compound[]) => {
         setImageEmbedding(null);
         setCompounds(prev => {
             const sortedById = [...prev].sort((a, b) => a.id - b.id);
+            setIsActive(false);
             return sortedById.map(compound => ({
                 ...compound,
                 score: 0,
@@ -105,6 +108,7 @@ export const useCompoundSearch = (initialCompounds: Compound[]) => {
         compounds,
         ready,
         progress,
+        isActive,
         imageEmbedding,
         searchByImage,
         resetSearch

@@ -47,7 +47,7 @@ self.addEventListener('message', async (event) => {
             const items = data;
             const embeddings: Record<number, number[]> = {};
 
-            const descriptions = items.map((item: any) => item.description);
+            const descriptions = items.map((item: any) => item.description_eng);
             
             const text_inputs = await SiglipService.tokenizer(descriptions, { 
                  padding: 'max_length', 

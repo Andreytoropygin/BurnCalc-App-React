@@ -22,10 +22,11 @@ export const ListPage: FC = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Используем хук для поиска по картинке
-  const { compounds, ready, progress, searchByImage, resetSearch } = useCompoundSearch(rawCompounds);
+  const { compounds, ready, progress, isActive, searchByImage, resetSearch } = useCompoundSearch(rawCompounds);
 
   const handleSearch = async () => {
     setLoading(true);
+    if (isActive) handleClear();
     await getCompoundsByName(query)
       .then(response => setRawCompounds(response))
       .catch(() => setRawCompounds(COMPOUNDS_MOCK.filter(compound =>

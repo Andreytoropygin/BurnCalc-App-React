@@ -7,7 +7,8 @@ export interface Compound {
   specificCo2Volume: number;
   imageUrl: string | null;
   videoUrl: string | null;
-  description: string;
+  description_eng: string;
+  description_rus: string;
 }
 
 export const getCompoundsByName = async (query = ""): Promise<Compound[]> => {
