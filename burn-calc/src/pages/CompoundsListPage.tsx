@@ -1,48 +1,55 @@
-import type { FC } from "react";
-import type { Compound } from "../modules/compoundsApi";
-import { getCombustionDraftBrief, type CombustionDraftBrief } from "../modules/combustionsApi";
-import { useState, useEffect, useRef } from "react";
+import { type FC, useState, useEffect, useRef } from "react";
 import { ROUTES, ROUTE_LABELS } from "../Routes";
 import { BreadCrumbs } from "../components/BreadCrumbs";
 import { SearchField } from "../components/SearchField";
-import { getCompoundsByName } from "../modules/compoundsApi";
 import { CompoundCard } from "../components/CompoundCard";
 import { Container, Spinner, Row, Col, Button, ProgressBar } from "react-bootstrap";
 import { CombustionWidget } from "../components/CombustionWidget";
 import { COMPOUNDS_MOCK } from "../modules/mock";
 import { useCompoundSearch } from "../hooks/useCompoundSearch";
-import "./ListPage.css";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../store";
+import { resetDraftWidget, fetchDraftBrief } from "../slices/draftWidgetSlice";
+import { Api } from "../api/axios";
+import type { CompoundResponseDto } from "../api/Api";
+import "./CompoundsListPage.css";
 
-export const ListPage: FC = () => {
+export const CompoundListPage: FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const [query, setQuery] = useState("");
-  const [rawCompounds, setRawCompounds] = useState<Compound[]>([]);
-  const [draft, setDraft] = useState<CombustionDraftBrief | null>(null);
+  const [rawCompounds, setRawCompounds] = useState<CompoundResponseDto[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const userName = useSelector((state: RootState) => state.user.name);
+  const { combustionId, compoundsCount } = useSelector((state: RootState) => state.draftWidget);
+
   // Используем хук для поиска по картинке
   const { compounds, ready, progress, isActive, searchByImage, resetSearch } = useCompoundSearch(rawCompounds);
 
-  const handleSearch = async () => {
+  const handleSearch = async (overrideQuery?: string) => {
     setLoading(true);
     if (isActive) handleClear();
-    await getCompoundsByName(query)
-      .then(response => setRawCompounds(response))
+
+    let searchQuery = query;
+    if (overrideQuery !== undefined) {
+      setQuery(overrideQuery);
+      searchQuery = overrideQuery;
+    }
+    
+    await Api.get(query.trim() ?
+      `api/compounds?search=${encodeURIComponent(searchQuery)}` :
+      'api/compounds'
+    )
+      .then(response => setRawCompounds(response.data))
       .catch(() => setRawCompounds(COMPOUNDS_MOCK.filter(compound =>
         compound.title
           .toLowerCase()
-          .startsWith(query.toLowerCase())
+          .startsWith(searchQuery.toLowerCase())
       )));
     setLoading(false);
   };
-
-  useEffect(() => {
-    handleSearch();
-    getCombustionDraftBrief()
-      .then(response => {setDraft(response); console.log(response)})
-      .catch(() => setDraft({combustionId: null, compoundsCount: 0}));
-  }, []);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -59,10 +66,23 @@ export const ListPage: FC = () => {
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
+  useEffect(() => {
+    handleSearch();
+  }, []);
+
+  useEffect(() => {
+    if (userName == null) {
+      handleSearch("");
+      dispatch(resetDraftWidget());
+    } else {
+      dispatch(fetchDraftBrief());
+    }
+  }, [userName, dispatch]);
+
   return (
     <Container className="py-4">
       <BreadCrumbs crumbs={[
-        { label: ROUTE_LABELS.LIST, path: ROUTES.LIST }
+        { label: ROUTE_LABELS.COMPOUNDS_LIST, path: ROUTES.COMPOUNDS_LIST }
       ]} />
 
       <SearchField
@@ -144,7 +164,7 @@ export const ListPage: FC = () => {
         </Row>
       )}
 
-      {draft && <CombustionWidget count={draft.compoundsCount} />}
+      <CombustionWidget id={combustionId} count={compoundsCount} />
     </Container>
   );
 };

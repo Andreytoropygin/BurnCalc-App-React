@@ -1,0 +1,11 @@
+.table-dark th {
+    background-color: #5389ae !important; /* Ваш фирменный синий */
+    color: white !important;
+    border-color: #4a7a9e !important; /* Цвет границ ячеек */
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .table-hover tbody tr:hover td {
+    background-color: rgba(83, 137, 174, 0.1); /* Легкий оттенок вашего синего */
+  }

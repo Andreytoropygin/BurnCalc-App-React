@@ -1,0 +1,434 @@
+/* === Исправления для ApplicationPage === */
+
+/* Контейнер страницы */
+.ApplicationPage .main-content {
+    padding: 40px 0;
+    min-height: calc(100vh - 200px);
+  }
+  
+  /* Заголовок страницы */
+  .page-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    color: #000;
+    position: relative;
+  }
+  
+  .page-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: #000;
+    border-radius: 2px;
+  }
+  
+  /* Секции */
+  .data-section,
+  .composition-section {
+    margin-bottom: 40px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    border: 1px solid #567;
+  }
+  
+  .section-title {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #000;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #def;
+  }
+  
+  /* Сетка полей ввода */
+  .input-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .input-group label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .input-group input {
+    padding: 10px 12px;
+    background-color: #f4eeff;
+    border: 1px solid #567;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  
+  .input-group input:focus {
+    outline: none;
+    border-color: #369;
+    box-shadow: 0 0 0 3px rgba(51, 102, 153, 0.15);
+  }
+  
+  .input-group input:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+  
+  /* Карточка соединения в заявке */
+  .request-combustion-card {
+    background-color: white;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border: 1px solid #567;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.2s;
+  }
+  
+  .request-combustion-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Шапка карточки */
+  .card-header {
+    background: linear-gradient(to bottom, #606a83, #505670);
+    color: white !important;
+    padding: 12px 20px;
+  }
+  
+  .request-combustion-name {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 0;
+  }
+  
+  /* Тело карточки */
+  .compound-combustion-card-body {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  /* Изображение в карточке */
+  .request-combustion-image {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border: 1px solid #dee2e6;
+  }
+  
+  .request-combustion-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 8px;
+  }
+  
+  /* Свойства соединения */
+  .request-combustion-properties {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px 24px;
+    min-width: 0;
+  }
+  
+  .property-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .property-group label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #555;
+    line-height: 1.3;
+  }
+  
+  .property-group input,
+  .property-group p {
+    padding: 8px 12px;
+    border: 1px solid #567;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    background-color: #f4eeff;
+    line-height: 1.4;
+  }
+  
+  .property-group input {
+    transition: border-color 0.2s;
+  }
+  
+  .property-group input:focus {
+    outline: none;
+    border-color: #369;
+    box-shadow: 0 0 0 2px rgba(51, 102, 153, 0.1);
+  }
+  
+  .property-group input:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+  }
+  
+  .property-group p {
+    background-color: transparent;
+    border-color: #def;
+    font-weight: 500;
+    color: #147;
+  }
+  
+  /* Результат расчета */
+  .property-result {
+    border-left: 3px solid #369;
+    padding-left: 16px;
+    background: linear-gradient(to right, rgba(51, 102, 153, 0.05), transparent);
+    border-radius: 0 5px 5px 0;
+  }
+  
+  .property-result label {
+    color: #369;
+    font-weight: 600;
+  }
+  
+  .property-result p {
+    font-size: 1.05rem;
+    color: #147;
+  }
+  
+  /* Кнопки действий внутри карточки */
+  .property-group .btn {
+    width: auto;
+    padding: 6px 16px;
+    font-size: 0.9rem;
+  }
+  
+  /* Секция кнопок */
+  .actions-section {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px dashed #def;
+  }
+  
+  .delete-request-btn-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Кнопка удаления заявки */
+  .btn-delete-request {
+    background: linear-gradient(to bottom, #606a83, #505670);
+    color: white;
+    border: 1px solid #567;
+    padding: 12px 32px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .btn-delete-request:hover:not(:disabled) {
+    background: linear-gradient(to bottom, #8d6a86, #635070);
+  }
+  
+  .btn-delete-request:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  /* Кнопки сохранения/подтверждения */
+  .actions-section .btn-primary,
+  .actions-section .btn-success {
+    padding: 12px 24px;
+    font-weight: 500;
+    min-width: 140px;
+    border-radius: 6px;
+  }
+  
+  /* Блокирующий оверлей */
+  .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    pointer-events: auto;
+  }
+  
+  .loading-overlay .spinner-border {
+    width: 3rem;
+    height: 3rem;
+    border-width: 0.3em;
+  }
+  
+  .loading-overlay p {
+    margin-top: 16px;
+    color: white;
+    font-weight: 500;
+    font-size: 1.1rem;
+  }
+  
+  /* Alert для статуса */
+  .alert-info {
+    background-color: #e7f1ff;
+    border-color: #369;
+    color: #147;
+    font-weight: 500;
+  }
+  
+  /* === Адаптив === */
+  @media (max-width: 991px) {
+    .card-body {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .request-combustion-image {
+      margin: 0 auto;
+    }
+    
+    .request-combustion-properties {
+      grid-template-columns: 1fr;
+      text-align: left;
+    }
+    
+    .property-result {
+      border-left: none;
+      border-top: 3px solid #369;
+      padding-left: 0;
+      padding-top: 12px;
+      border-radius: 5px 5px 0 0;
+    }
+    
+    .input-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .page-title {
+      font-size: 1.5rem;
+    }
+    
+    .section-title {
+      font-size: 1.1rem;
+    }
+    
+    .request-combustion-image {
+      width: 100px;
+      height: 100px;
+    }
+    
+    .property-group input,
+    .property-group p {
+      font-size: 0.9rem;
+      padding: 6px 10px;
+    }
+    
+    .btn-delete-request {
+      width: 100%;
+      min-width: auto;
+    }
+    
+    .delete-request-btn-container {
+      flex-direction: column;
+    }
+    
+    .actions-section .btn {
+      width: 100%;
+    }
+  }
+  
+  /* === Утилиты === */
+  .text-muted {
+    color: #6c757d !important;
+  }
+  
+  .fw-bold {
+    font-weight: 600 !important;
+  }
+  
+  .mb-0 {
+    margin-bottom: 0 !important;
+  }
+  
+  .me-2 {
+    margin-right: 8px !important;
+  }
+  
+  .mb-2 {
+    margin-bottom: 8px !important;
+  }
+  
+/* Блокирующий оверлей при запросах */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    pointer-events: auto;
+  }
+  
+  /* Отключаем взаимодействие с элементами под оверлеем */
+  .loading-overlay + * {
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  
+  /* Адаптив для полей ввода на мобильных */
+  @media (max-width: 768px) {
+    .input-grid {
+      grid-template-columns: 1fr !important;
+    }
+    
+    .request-combustion-properties {
+      grid-template-columns: 1fr !important;
+    }
+    
+    .card-body {
+      flex-direction: column !important;
+      text-align: center;
+    }
+    
+    .request-combustion-image img {
+      margin: 0 auto 15px !important;
+    }
+  }

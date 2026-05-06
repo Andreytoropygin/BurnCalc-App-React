@@ -26,6 +26,7 @@ export const SearchField: FC<Props> = ({
     <div className="search-container">
       <Form onSubmit={handleSubmit} className="search-form-custom">
         <Form.Control
+          name="search"
           type="text"
           className="search-input-custom"
           placeholder={placeholder}

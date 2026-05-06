@@ -7,7 +7,7 @@ import "./SimilarCompoundCard.css"
 
 export const SimilarCompoundCard: FC<{ compound: SimilarCompound }> = ({ compound }) => (
     <Link
-      to={`${ROUTES.DETAIL.replace(":id", String(compound.id))}`}
+      to={`${ROUTES.COMPOUND.replace(":id", String(compound.id))}`}
       className="similar-compound-row d-flex align-compounds-center gap-2 p-2 rounded hover-shadow text-decoration-none"
     >
       <img
@@ -24,7 +24,7 @@ export const SimilarCompoundCard: FC<{ compound: SimilarCompound }> = ({ compoun
       />
       <div className="similar-compound-info d-flex flex-column">
         <span className="fw-semibold text-dark">{compound.title}</span>
-        <span className="text-muted small">{compound.description}</span>
+        <span className="text-muted small">{compound.description_rus}</span>
       </div>
       <div className="similarity-info d-flex flex-column">
         <span className="text-muted small">Сходство<br/></span>

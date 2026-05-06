@@ -1,8 +1,11 @@
-import type { FC } from "react";
+import { useState, type FC } from "react";
 import type { Compound } from "../modules/compoundsApi";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../Routes";
-import { Card } from "react-bootstrap";
+import { Card, Button, Spinner } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../store";
+import { addToDraft } from "../slices/draftWidgetSlice";
 import "./CompoundCard.css";
 
 interface Props {
@@ -11,9 +14,24 @@ interface Props {
 }
 
 export const CompoundCard: FC<Props> = ({ compound, similarityScore }) => {
+  const dispatch = useDispatch<AppDispatch>();
+  const userName = useSelector((state: RootState) => state.user.name);
+  const [ isAdding, setIsAdding ] = useState(false);
+
+  const handleAdd = () => {
+    setIsAdding(true);
+    try {
+      dispatch(addToDraft(compound.id));
+    } catch (error) {
+      console.error("Ошибка добавления в заявку:", error);
+    } finally {
+      setIsAdding(false);
+    }
+  };
+
   return (
     <Card className="compound-card h-100">
-      <Link to={`${ROUTES.DETAIL.replace(":id", String(compound.id))}`} className="card-link">
+      <Link to={`${ROUTES.COMPOUND.replace(":id", String(compound.id))}`} className="card-link">
         <Card.Img
           variant="top"
           src={`${compound.imageUrl}`}
@@ -35,6 +53,22 @@ export const CompoundCard: FC<Props> = ({ compound, similarityScore }) => {
           )}
         </Card.Body>
       </Link>
+      {userName !== null && (
+        <div className="p-2 pt-0 border-top bg-white">
+          <Button
+            size="sm"
+            className="w-100 my-btn"
+            onClick={handleAdd}
+            disabled={isAdding}
+          >
+            {isAdding ? (
+              <Spinner animation="border" size="sm" className="me-2" />
+            ) : (
+              'Добавить'
+            )}
+          </Button>
+        </div>
+      )}
     </Card>
   );
 };

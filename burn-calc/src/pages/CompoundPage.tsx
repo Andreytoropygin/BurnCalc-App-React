@@ -1,18 +1,19 @@
 import type { FC } from "react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getCompoundById, getCompoundsByName, type Compound } from "../modules/compoundsApi";
 import { BreadCrumbs } from "../components/BreadCrumbs";
 import { ROUTES, ROUTE_LABELS } from "../Routes";
-import { Container, Spinner, Card, Row, Col, ProgressBar } from "react-bootstrap";
+import { Container, Spinner, Card, Row, Col } from "react-bootstrap";
 import { COMPOUNDS_MOCK } from "../modules/mock";
+import type { CompoundResponseDto } from "../api/Api";
+import { Api } from "../api/axios";
 // import { useSemanticSearch } from "../hooks/useSemanticSearch";
 // import { SimilarCompoundCard } from "../components/SimilarCompoundCard";
-import "./DetailPage.css";
+import "./CompoundPage.css";
 
-export const DetailPage: FC = () => {
+export const CompoundPage: FC = () => {
   const { id } = useParams();
-  const [compound, setCompound] = useState<Compound | null>(null);
+  const [compound, setCompound] = useState<CompoundResponseDto | null>(null);
   const [loading, setLoading] = useState(true);
 
   // Состояние для всех соединений (нужно для воркера)
@@ -31,8 +32,8 @@ export const DetailPage: FC = () => {
   useEffect(() => {
     if (!id) return;
     setLoading(true);
-    getCompoundById(id)
-      .then(response => setCompound(response))
+    Api.get(`/api/compounds/${id}`)
+      .then(response => setCompound(response.data))
       .catch(() => setCompound(COMPOUNDS_MOCK.find(compound => compound.id.toString() === id) || null));
     setLoading(false);
   }, [id]);
@@ -46,7 +47,7 @@ export const DetailPage: FC = () => {
     <Container className="py-4">
       <BreadCrumbs
         crumbs={[
-          { label: ROUTE_LABELS.LIST, path: ROUTES.LIST },
+          { label: ROUTE_LABELS.COMPOUNDS_LIST, path: ROUTES.COMPOUNDS_LIST },
           { label: compound.title },
         ]}
       />
