@@ -1,6 +1,6 @@
-import type { Compound } from "./compoundsApi";
+import type { CompoundResponseDto } from "../api/Api";
 
-export const COMPOUNDS_MOCK: Compound[] = [
+export const COMPOUNDS_MOCK: CompoundResponseDto[] = [
     {
         id: 1,
         title: "Метан",
@@ -10,7 +10,8 @@ export const COMPOUNDS_MOCK: Compound[] = [
         specificCo2Volume: 22.4,
         imageUrl: null,
         videoUrl: null,
-        description: "Colorless, odorless gas that is lighter than air and insoluble in water",
+        description_eng: "A dark sphere bonded to four lighter spheres in a tetrahedral arrangement, representing a simple molecular structure with symmetrical geometry",
+        description_rus: "Центральный атом углерода связан с четырьмя водородами в тетраэдрической геометрии - простейшая органическая молекула"
     },
     {
         id: 2,
@@ -21,7 +22,8 @@ export const COMPOUNDS_MOCK: Compound[] = [
         specificCo2Volume: 44.8,
         imageUrl: null,
         videoUrl: null,
-        description: "Colorless gas with a sweetish odor, relatively non-toxic, and poorly soluble in water",
+        description_eng: "Two dark spheres double-bonded, each attached to two light spheres — a planar, symmetrical molecule with trigonal geometry around each central atom",
+        description_rus: "Два атома углерода соединены двойной связью, каждый несёт по два водорода - плоская симметричная структура, типичный алкен"
     },
     {
         id: 3,
@@ -32,7 +34,8 @@ export const COMPOUNDS_MOCK: Compound[] = [
         specificCo2Volume: 44.8,
         imageUrl: null,
         videoUrl: null,  
-        description: "Colorless gas with a faint garlic-like odor, lighter than air, and poorly soluble in water",
+        description_eng: "A linear molecule with two large dark spheres flanked by smaller light spheres, suggesting a core with terminal atoms in a straight-line arrangement",
+        description_rus: "Линейная молекула: два углерода тройной связью, на концах по одному водороду. Минималистичная и жёсткая структура"
     },
     {
         id: 4,
@@ -43,7 +46,8 @@ export const COMPOUNDS_MOCK: Compound[] = [
         specificCo2Volume: 134.4,
         imageUrl: null,
         videoUrl: null,
-        description: "Colorless, highly flammable liquid with a characteristic aromatic odor, insoluble in water but miscible with organic solvents",
+        description_eng: "A ball-and-stick model of a small organic molecule: six black carbon atoms in a ring, each bonded to one white hydrogen atom",
+        description_rus: "Шесть углеродов в кольце, каждый связан с двумя водородами - объёмная «кресловидная» конформация, насыщенный циклоалкан"
     },
     {
         id: 5,
@@ -54,7 +58,8 @@ export const COMPOUNDS_MOCK: Compound[] = [
         specificCo2Volume: 44.8,
         imageUrl: null,
         videoUrl: null,
-        description: "Volatile, flammable, colorless liquid with a characteristic alcoholic odor, completely miscible with water",
+        description_eng: "A ball-and-stick ethanol molecule model: two carbons, one oxygen and six hydrogens",
+        description_rus: "Два углерода, один из них несёт гидроксильную группу (OH) - простой спирт, полярный конец, неполярный хвост"
     },
     {
         id: 7,
@@ -65,6 +70,7 @@ export const COMPOUNDS_MOCK: Compound[] = [
         specificCo2Volume: 0,
         imageUrl: null,
         videoUrl: null,
-        description: "An abstract compound, no certain properties",
+        description_eng: "Abstract of compound, no image",
+        description_rus: "Описание на русском языке"
     },
 ];

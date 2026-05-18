@@ -42,3 +42,9 @@ video::-webkit-media-controls {
 .card-text {
     margin-bottom: 0.5rem;
 }
+
+@media (max-width: 768px) {  
+    .card-text {
+        font-size: 75%;
+    }
+}

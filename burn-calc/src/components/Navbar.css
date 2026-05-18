@@ -34,3 +34,35 @@
 .nav-link-custom:hover {
     opacity: 0.8;
 }
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 !important;
+    }
+
+    .custom-navbar {
+        background-color: #5389ae !important;
+        padding: 7px 0;
+    }
+    .logo-icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 6px;
+        font-size: 0.9rem;
+    }
+
+    .logo-text {
+        text-shadow: 1px 2px 3px #147;
+        font-size: 27px;
+        line-height: 43px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .nav-link-custom {
+        color: white !important;
+        font-size: 0.9rem;
+        margin-left: 20px;
+        transition: opacity 0.2s;
+    }
+}

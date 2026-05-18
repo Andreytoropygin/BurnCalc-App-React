@@ -311,7 +311,6 @@
   @media (max-width: 991px) {
     .card-body {
       flex-direction: column;
-      text-align: center;
     }
     
     .request-combustion-image {
@@ -425,7 +424,6 @@
     
     .card-body {
       flex-direction: column !important;
-      text-align: center;
     }
     
     .request-combustion-image img {

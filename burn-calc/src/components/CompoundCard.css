@@ -1,13 +1,13 @@
 .compound-card {
-    width: 248px;
-    max-width: 100%;
+    flex: 1 1 calc(25% - 32px);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border: 1px solid #567 !important;
     border-radius: 6px !important;
     background-color: white !important;
     box-shadow: none !important;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
 }
   
 .card-link {
@@ -16,12 +16,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
+    width: 100%;
 }
 
 .compound-image {
-    width: 150px !important;
-    height: 150px !important;
+    width: 80% !important;
+    aspect-ratio: 1/1 !important;
     object-fit: contain !important;
     margin: 20px auto 10px auto !important;
     display: block;

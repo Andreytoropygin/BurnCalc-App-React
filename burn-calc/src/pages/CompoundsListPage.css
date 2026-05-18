@@ -1,13 +1,9 @@
 .compounds-grid {
     gap: 32px;
+    min-width: 50%;
     margin-top: 1.5rem !important;
-    display: inline-flex;
-    flex-wrap: wrap;
-}
-
-.compounds-grid {
-    gap: 32px;
-    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 }
 
 .similarity-badge {
@@ -20,6 +16,10 @@
 .image-search-section {
     border: 1px solid #567;
     background-color: #f8f9fa;
+}
+
+.img-search-container {
+    gap: 20px;
 }
 
 .preview-image {
@@ -61,4 +61,42 @@
 .reset-image-search-btn:hover {
     background-color: #345 !important;
     color: white !important;
+}
+
+@media (max-width: 768px) {
+    .img-search-container {
+        gap: 5% !important;
+    }
+
+    .preview-image-container {
+        flex-shrink: 0;
+        width: 40%;
+        aspect-ratio: 1 / 1;
+    }
+
+    .preview-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .placeholder-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .img-search-btn-container {
+        width: 55%;
+    }
+
+    .load-image-btn .reset-image-search-btn {
+        width: 100%;
+    }
+    
+    .search-container {
+        gap: 10px;
+    }
+    
+    .search-form {
+        max-width: 100%;
+    }
 }

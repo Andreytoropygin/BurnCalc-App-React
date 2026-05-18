@@ -1,8 +1,10 @@
-import { useState, type FC } from "react";
+import { useEffect, useState, type FC } from "react";
 import { Navbar, Container, Nav, Button, Badge } from "react-bootstrap";
 import { ROUTES } from "../Routes";
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { setQuery } from "../slices/filterSlice";
+import { resetDraftWidget } from "../slices/draftWidgetSlice";
 import type { AppDispatch, RootState } from '../store';
 import { clearUser } from '../slices/userSlice';
 import { Axios } from '../api/Axios';
@@ -27,16 +29,26 @@ export const AppNavbar: FC = () => {
     }
   };
 
+  useEffect(() => {
+    if (user.name == null) {
+      dispatch(setQuery(""));
+      dispatch(resetDraftWidget());
+    }
+  }, [user.name, dispatch]);
+
   return (
-    <Navbar className="custom-navbar" expand="lg" variant="dark">
+    <Navbar className="custom-navbar" expand="md" variant="dark">
       <Container>
         <Navbar.Brand as={Link} to={ROUTES.COMPOUNDS_LIST} className="d-flex align-items-center gap-2">
           <span className="logo-icon">BC</span>
           <span className="logo-text">BurnCalc</span>
         </Navbar.Brand>
 
+        {/* Кнопка бургера, которая появится на экранах меньше 768px*/}
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
+          <Nav className="me-auto me-md-auto text-end text-md-start">
             <Nav.Link as={Link} to={ROUTES.COMPOUNDS_LIST} className="nav-link-custom">
               Соединения
             </Nav.Link>
@@ -47,16 +59,14 @@ export const AppNavbar: FC = () => {
             )}
           </Nav>
 
-          <div className="d-flex align-items-center gap-3">
+          <div className="d-flex align-items-center justify-content-end gap-3 w-100 pb-3 pb-lg-0">
             {user.name === null ? (
               // Кнопка для гостя
-              <Button 
-                href={ROUTES.LOGIN} 
-                variant="outline-light" 
-                size="sm"
-              >
-                Войти
-              </Button>
+              <Link to={ROUTES.LOGIN}>
+                <Button variant="outline-light" size="sm">
+                  Войти
+                </Button>
+              </Link>
             ) : (
               // Блок для авторизованного пользователя
               <div className="d-flex align-items-center gap-2">

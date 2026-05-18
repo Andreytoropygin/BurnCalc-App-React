@@ -22,3 +22,9 @@
     color: black;
     font-weight: 500;
 }
+
+@media (max-width: 768px) {  
+    .breadCrumbs {
+        padding: 0;
+    }
+}

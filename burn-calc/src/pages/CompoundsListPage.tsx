@@ -3,26 +3,26 @@ import { ROUTES, ROUTE_LABELS } from "../Routes";
 import { BreadCrumbs } from "../components/BreadCrumbs";
 import { SearchField } from "../components/SearchField";
 import { CompoundCard } from "../components/CompoundCard";
-import { Container, Spinner, Row, Col, Button, ProgressBar } from "react-bootstrap";
+import { Container, Spinner, Col, Button, ProgressBar } from "react-bootstrap";
 import { CombustionWidget } from "../components/CombustionWidget";
 import { COMPOUNDS_MOCK } from "../modules/mock";
 import { useCompoundSearch } from "../hooks/useCompoundSearch";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../store";
-import { resetDraftWidget, fetchDraftBrief } from "../slices/draftWidgetSlice";
+import { setQuery } from "../slices/filterSlice";
 import { Axios } from "../api/Axios";
 import type { CompoundResponseDto } from "../api/Api";
 import "./CompoundsListPage.css";
 
 export const CompoundListPage: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const [query, setQuery] = useState("");
+
+  const query = useSelector((state: RootState) => state.filter.query);
   const [rawCompounds, setRawCompounds] = useState<CompoundResponseDto[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const userName = useSelector((state: RootState) => state.user.name);
   const { combustionId, compoundsCount } = useSelector((state: RootState) => state.draftWidget);
 
   // Используем хук для поиска по картинке
@@ -34,7 +34,7 @@ export const CompoundListPage: FC = () => {
 
     let searchQuery = query;
     if (overrideQuery !== undefined) {
-      setQuery(overrideQuery);
+      dispatch(setQuery(overrideQuery));
       searchQuery = overrideQuery;
     }
     
@@ -70,15 +70,6 @@ export const CompoundListPage: FC = () => {
     handleSearch();
   }, []);
 
-  useEffect(() => {
-    if (userName == null) {
-      handleSearch("");
-      dispatch(resetDraftWidget());
-    } else {
-      dispatch(fetchDraftBrief());
-    }
-  }, [userName, dispatch]);
-
   return (
     <Container className="py-4">
       <BreadCrumbs crumbs={[
@@ -87,14 +78,14 @@ export const CompoundListPage: FC = () => {
 
       <SearchField
         value={query}
-        onChange={setQuery}
+        onChange={(q) => dispatch(setQuery(q))}
         onSubmit={handleSearch}
         loading={loading}
       />
 
       <div className="image-search-section mb-4 p-3 bg-light rounded">
         <h5 className="mb-3">Поиск по изображению</h5>
-        <div className="d-flex gap-3 align-items-start flex-wrap">
+        <div className="d-flex align-items-start flex-wrap img-search-container">
           <input 
             type="file" 
             accept="image/*" 
@@ -104,7 +95,7 @@ export const CompoundListPage: FC = () => {
             disabled={!ready}
           />
 
-          <div style={{ flexShrink: 0 }}>
+          <div className="preview-image-container">
             {selectedImage ? (
               <img 
                 src={selectedImage} 
@@ -114,7 +105,7 @@ export const CompoundListPage: FC = () => {
             ) : (<div className="placeholder-image">Нет фото</div>)}
           </div>
 
-          <div className="d-flex flex-column gap-2" style={{ minWidth: '200px' }}>
+          <div className="d-flex flex-column gap-2 img-search-btn-container">
             <Button
               className="load-image-btn"
               onClick={() => fileInputRef.current?.click()} 
@@ -149,19 +140,17 @@ export const CompoundListPage: FC = () => {
       )}
 
       {!loading && (
-        <Row className="g-4 compounds-grid">
+        <div className="g-4 compounds-grid">
           {compounds.filter(compound => compound.isVisible).length > 0 ? (
             compounds.filter(compound => compound.isVisible).map((compound) => (
-              <Col key={compound.id} xs="auto">
-                <CompoundCard compound={compound} similarityScore={compound.score} />
-              </Col>
+              <CompoundCard compound={compound} similarityScore={compound.score} />
             ))
           ) : (
             <Col xs={12} className="text-center mt-5">
               <h3>По вашему запросу ничего не найдено</h3>
             </Col>
           )}
-        </Row>
+        </div>
       )}
 
       <CombustionWidget id={combustionId} count={compoundsCount} />

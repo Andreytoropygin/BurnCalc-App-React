@@ -70,8 +70,8 @@ export const CompoundPage: FC = () => {
                   src={`${compound.videoUrl}`}
                   onError={(e) => {
                     const target = e.target as HTMLVideoElement;
-                    if (target.src !== window.location.origin + "/default-video.mp4") {
-                      target.src = "/default-video.mp4";
+                    if (target.src !== window.location.origin + "/BurnCalc-App-React/default-video.mp4") {
+                      target.src = "/BurnCalc-App-React/default-video.mp4";
                       target.load();
                     }
                   }}

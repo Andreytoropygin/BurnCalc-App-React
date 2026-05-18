@@ -30,14 +30,14 @@ export const CompoundCard: FC<Props> = ({ compound, similarityScore }) => {
   };
 
   return (
-    <Card className="compound-card h-100">
+    <div className="compound-card">
       <Link to={`${ROUTES.COMPOUND.replace(":id", String(compound.id))}`} className="card-link">
         <Card.Img
           variant="top"
           src={`${compound.imageUrl}`}
           className="compound-image"
           onError={(e) => {
-            (e.target as HTMLImageElement).src = "/default-compound.png";
+            (e.target as HTMLImageElement).src = "/BurnCalc-App-React/default-compound.png";
           }}
         />
         <Card.Body className="compound-card-body">
@@ -54,21 +54,19 @@ export const CompoundCard: FC<Props> = ({ compound, similarityScore }) => {
         </Card.Body>
       </Link>
       {userName !== null && (
-        <div className="p-2 pt-0 border-top bg-white">
-          <Button
-            size="sm"
-            className="w-100 my-btn"
-            onClick={handleAdd}
-            disabled={isAdding}
-          >
-            {isAdding ? (
-              <Spinner animation="border" size="sm" className="me-2" />
-            ) : (
-              'Добавить'
-            )}
-          </Button>
-        </div>
+        <Button
+          size="sm"
+          className="w-100 my-btn"
+          onClick={handleAdd}
+          disabled={isAdding}
+        >
+          {isAdding ? (
+            <Spinner animation="border" size="sm" className="me-2" />
+          ) : (
+            'Добавить'
+          )}
+        </Button>
       )}
-    </Card>
+    </div>
   );
 };
