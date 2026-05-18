@@ -10,7 +10,7 @@ import { useCompoundSearch } from "../hooks/useCompoundSearch";
 import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../store";
 import { resetDraftWidget, fetchDraftBrief } from "../slices/draftWidgetSlice";
-import { Api } from "../api/axios";
+import { Axios } from "../api/Axios";
 import type { CompoundResponseDto } from "../api/Api";
 import "./CompoundsListPage.css";
 
@@ -38,7 +38,7 @@ export const CompoundListPage: FC = () => {
       searchQuery = overrideQuery;
     }
     
-    await Api.get(query.trim() ?
+    await Axios.get(query.trim() ?
       `api/compounds?search=${encodeURIComponent(searchQuery)}` :
       'api/compounds'
     )

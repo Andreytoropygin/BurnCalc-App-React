@@ -4,7 +4,7 @@ import { Form, Button, Card, Container, Alert } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import type { RootState } from '../store';
-import { Api } from '../api/axios';
+import { Axios } from '../api/Axios';
 import { ROUTES } from '../Routes';
 
 export const RegisterPage: FC = () => {
@@ -24,7 +24,7 @@ export const RegisterPage: FC = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await Api.post('api/users/register', { name, password });
+      await Axios.post('api/users/register', { name, password });
       navigate(ROUTES.LOGIN);
     } catch (err: any) {
       setError(err.response?.data?.message || 'Ошибка регистрации');

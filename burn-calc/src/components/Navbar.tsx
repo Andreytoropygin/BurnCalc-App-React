@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import type { AppDispatch, RootState } from '../store';
 import { clearUser } from '../slices/userSlice';
-import { Api } from '../api/axios';
+import { Axios } from '../api/Axios';
 import "./Navbar.css"
 
 export const AppNavbar: FC = () => {
@@ -17,7 +17,7 @@ export const AppNavbar: FC = () => {
   const handleLogout = async () => {
     setIsLoading(true);
     try {
-      await Api.post('api/users/logout');
+      await Axios.post('api/users/logout');
       dispatch(clearUser());
       navigate(ROUTES.COMPOUNDS_LIST);
     } catch (e) {

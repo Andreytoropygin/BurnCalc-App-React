@@ -155,13 +155,15 @@ export const CombustionsListPage: FC = () => {
                   <th>Статус</th>
                   <th>Дата создания</th>
                   <th>H₂O / CO₂</th>
+                  <th>Описание образца</th>
+                  <th>Совпадения</th>
                   <th>Действия</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredItems.sort((a, b) => a.id - b.id).map((app) => (
                   <tr key={app.id}>
-                    <td>#{app.id}</td>
+                    <td>{app.id}</td>
                     <td>{app.technicianName}</td>
                     <td>{app.expertName || '—'}</td>
                     <td>
@@ -177,6 +179,8 @@ export const CombustionsListPage: FC = () => {
                       {app.h2oVolume ? `${app.h2oVolume} л / ` : ''}
                       {app.co2Volume ? `${app.co2Volume} л` : '—'}
                     </td>
+                    <td>{app.sampleDescription}</td>
+                    <td>{app.resultsCount}</td>
                     <td>
                       <div className="d-flex gap-2">
                         <Button
@@ -188,7 +192,7 @@ export const CombustionsListPage: FC = () => {
                         </Button>
                         
                         {/* Кнопки для эксперта */}
-                        {user.isExpert && app.status !== 'completed' && app.status !== 'draft' && (
+                        {user.isExpert && app.status === 'formed' && (
                           <>
                             <Button
                               size="sm"

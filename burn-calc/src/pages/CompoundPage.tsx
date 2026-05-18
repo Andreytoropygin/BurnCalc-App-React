@@ -6,7 +6,7 @@ import { ROUTES, ROUTE_LABELS } from "../Routes";
 import { Container, Spinner, Card, Row, Col } from "react-bootstrap";
 import { COMPOUNDS_MOCK } from "../modules/mock";
 import type { CompoundResponseDto } from "../api/Api";
-import { Api } from "../api/axios";
+import { Axios } from "../api/Axios";
 // import { useSemanticSearch } from "../hooks/useSemanticSearch";
 // import { SimilarCompoundCard } from "../components/SimilarCompoundCard";
 import "./CompoundPage.css";
@@ -32,7 +32,7 @@ export const CompoundPage: FC = () => {
   useEffect(() => {
     if (!id) return;
     setLoading(true);
-    Api.get(`/api/compounds/${id}`)
+    Axios.get(`/api/compounds/${id}`)
       .then(response => setCompound(response.data))
       .catch(() => setCompound(COMPOUNDS_MOCK.find(compound => compound.id.toString() === id) || null));
     setLoading(false);

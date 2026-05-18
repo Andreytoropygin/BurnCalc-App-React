@@ -14,11 +14,25 @@ interface CombustionsState {
   };
 }
 
+// Вспомогательная функция для получения сегодняшней даты в формате YYYY-MM-DD
+const getTodayDate = (): string => {
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, '0');
+  const dd = String(today.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+};
+
 const initialState: CombustionsState = {
   items: [],
   isLoading: false,
   error: null,
-  filters: {},
+  filters: {
+    status: '',
+    formedAtFrom: getTodayDate(),
+    formedAtTo: getTodayDate(),
+    creatorName: '',
+  },
 };
 
 // Получение списка заявок с фильтрами
@@ -29,8 +43,8 @@ export const fetchCombustionsList = createAsyncThunk(
       // Передаем фильтры в query параметры API
       const res = await apiClient.api.combustionControllerFindAll({
         status: filters.status,
-        formedAtFrom: filters.formedAtFrom,
-        formedAtTo: filters.formedAtTo,
+        formedAtFrom: filters.formedAtFrom || undefined,
+        formedAtTo: filters.formedAtTo || undefined,
       });
       return res.data;
     } catch (err: any) {

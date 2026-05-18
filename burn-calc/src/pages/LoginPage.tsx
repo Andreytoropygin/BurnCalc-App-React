@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import type { AppDispatch, RootState } from '../store';
 import { setUser } from '../slices/userSlice';
-import { Api } from '../api/axios';
+import { Axios } from '../api/Axios';
 import { ROUTES } from '../Routes';
 
 export const LoginPage: FC = () => {
@@ -27,7 +27,7 @@ export const LoginPage: FC = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await Api.post('api/users/login', { name, password });
+      const response = await Axios.post('api/users/login', { name, password });
       dispatch(setUser({ user: response.data }));
     } catch (err: any) {
       setError(err.response?.data?.message || 'Ошибка авторизации');
