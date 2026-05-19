@@ -10,10 +10,11 @@ import { Axios } from "../api/Axios";
 // import { useSemanticSearch } from "../hooks/useSemanticSearch";
 // import { SimilarCompoundCard } from "../components/SimilarCompoundCard";
 import "./CompoundPage.css";
+import defaultVideo from "../../public/default-video.mp4"
 
 export const CompoundPage: FC = () => {
   const { id } = useParams();
-  const [compound, setCompound] = useState<CompoundResponseDto | null>(null);
+  const [compound, setCompound] = useState<CompoundResponseDto | null | undefined>(undefined);
   const [loading, setLoading] = useState(true);
 
   // Состояние для всех соединений (нужно для воркера)
@@ -38,9 +39,9 @@ export const CompoundPage: FC = () => {
     setLoading(false);
   }, [id]);
 
-  if (loading)
+  if (compound === undefined || loading)
     return <div className="text-center mt-5"><Spinner animation="border" /></div>;
-  if (!compound)
+  if (compound === null)
     return <div className="text-center mt-4"><h2>Соединение не найдено</h2></div>;
 
   return (
@@ -70,8 +71,8 @@ export const CompoundPage: FC = () => {
                   src={`${compound.videoUrl}`}
                   onError={(e) => {
                     const target = e.target as HTMLVideoElement;
-                    if (target.src !== window.location.origin + "/default-video.mp4") {
-                      target.src = "/default-video.mp4";
+                    if (target.src !== window.location.origin + defaultVideo) {
+                      target.src = defaultVideo;
                       target.load();
                     }
                   }}

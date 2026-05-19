@@ -12,7 +12,7 @@ import { CombustionsListPage } from "./pages/CombustionsListPage";
 
 export const App: FC = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/BurnCalc-App-React/">
       <AppNavbar />
       <Routes>
         <Route path="/" element={<Navigate to="/compounds" replace />} />

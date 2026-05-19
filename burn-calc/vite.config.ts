@@ -1,11 +1,11 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa';
-// import mkcert from 'vite-plugin-mkcert';
+import mkcert from 'vite-plugin-mkcert';
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/',
+  base: '/BurnCalc-App-React/',
   server: {
     port: 3000,
     strictPort: true,
@@ -18,7 +18,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    // mkcert(),
+    mkcert(),
     VitePWA({
       injectRegister: 'inline', 
       registerType: 'autoUpdate',

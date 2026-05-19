@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import type { AppDispatch, RootState } from "../store";
 import { addToDraft } from "../slices/draftWidgetSlice";
 import "./CompoundCard.css";
+import defaultImage from "../../public/default-compound.png"
 
 interface Props {
   compound: Compound;
@@ -37,7 +38,7 @@ export const CompoundCard: FC<Props> = ({ compound, similarityScore }) => {
           src={`${compound.imageUrl}`}
           className="compound-image"
           onError={(e) => {
-            (e.target as HTMLImageElement).src = "/default-compound.png";
+            (e.target as HTMLImageElement).src = defaultImage;
           }}
         />
         <Card.Body className="compound-card-body">
