@@ -26,3 +26,6 @@ dist-ssr
 # Media content
 public/images
 public/videos
+
+*.crt
+*.key

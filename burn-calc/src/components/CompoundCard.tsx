@@ -37,7 +37,7 @@ export const CompoundCard: FC<Props> = ({ compound, similarityScore }) => {
           src={`${compound.imageUrl}`}
           className="compound-image"
           onError={(e) => {
-            (e.target as HTMLImageElement).src = "/BurnCalc-App-React/default-compound.png";
+            (e.target as HTMLImageElement).src = "/default-compound.png";
           }}
         />
         <Card.Body className="compound-card-body">

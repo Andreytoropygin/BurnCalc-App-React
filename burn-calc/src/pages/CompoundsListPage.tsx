@@ -143,7 +143,7 @@ export const CompoundListPage: FC = () => {
         <div className="g-4 compounds-grid">
           {compounds.filter(compound => compound.isVisible).length > 0 ? (
             compounds.filter(compound => compound.isVisible).map((compound) => (
-              <CompoundCard compound={compound} similarityScore={compound.score} />
+              <CompoundCard key={compound.id} compound={compound} similarityScore={compound.score} />
             ))
           ) : (
             <Col xs={12} className="text-center mt-5">
