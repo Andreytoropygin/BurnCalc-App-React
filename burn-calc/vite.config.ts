@@ -30,6 +30,7 @@ export default defineConfig({
         type: 'module',
       },
       manifest: {
+        id: '/BurnCalc-App-React/',
         name: 'BurnCalc',
         short_name: 'BC',
         description: 'Расчет количества вещества по продуктам сгорания',
@@ -37,12 +38,12 @@ export default defineConfig({
         background_color: '#def',
         icons: [
           {
-            src: '/icon-192x192.png',
+            src: 'icon-192x192.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: '/icon-512x512.png',
+            src: 'icon-512x512.png',
             sizes: '512x512',
             type: 'image/png'
           }
