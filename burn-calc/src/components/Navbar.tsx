@@ -59,7 +59,7 @@ export const AppNavbar: FC = () => {
             )}
           </Nav>
 
-          <div className="d-flex align-items-center justify-content-end gap-3 w-100 pb-3 pb-lg-0">
+          <div className="d-none align-items-center justify-content-end gap-3 w-100 pb-3 pb-lg-0">
             {user.name === null ? (
               // Кнопка для гостя
               <Link to={ROUTES.LOGIN}>

@@ -1,24 +1,18 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa';
-import mkcert from 'vite-plugin-mkcert';
+// import mkcert from 'vite-plugin-mkcert';
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/BurnCalc-App-React/',
+  base: '/',
   server: {
     port: 3000,
     strictPort: true,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8000',
-        changeOrigin: true,
-      },
-    },
   },
   plugins: [
     react(),
-    mkcert(),
+    // mkcert(),
     VitePWA({
       injectRegister: 'inline', 
       registerType: 'autoUpdate',
